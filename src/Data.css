@@ -1,0 +1,8 @@
+.btn-dem {
+  height: "22px";
+  width: "22px";
+}
+.btn-dem:hover {
+  background-color: lightblue;
+  color: deepskyblue;
+}
