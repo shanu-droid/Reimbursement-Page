@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Claimreimnurse from './Claimreimnurse'
 import {mockdata, Header, Data} from './Data'
 
-const Container = () => {
 
+
+
+const Container = () => {
+    
  
+
     return (
         <div clasName="row" style={{background:"white", width:"200vh", height:"83%", marginLeft:"70px", borderRadius:"20px", fontFamily:"DM Sans"}}>  
            <div className="row">
@@ -26,9 +30,13 @@ const Container = () => {
         <div className="col-3" >
            <Claimreimnurse/>
         </div>
+
            </div>
+        
            
         </div>
+     
+        
     )
 }
 

@@ -3,7 +3,10 @@ import rejectedimg from './Rejected.svg'
 import acceptedimg from './Accept.svg'
 import editimg from './Edit.svg'
 import deleteimg from './Delete.svg'
-
+import { useState } from 'react'
+import Editpopup from './Editpopup'
+import './Data.css'
+import Rejectionmsg from './Rejectionmsg'
 
 
 export const mockdata= 
@@ -102,77 +105,94 @@ export const Header = () => {
     )
 }
 
-const Attachment = ({num}) => {
-    return (
-        <div className="row">
-            <div style={{height:"20px", width:"20px", border:"1px solid #BCBDC8", borderRadius:"5px", fontSize:"9px", textAlign:"center", paddingTop:"2px"}}>
-            #{num}
-           </div> 
-        </div>
-    )
-}
 
-const Status = ({status}) => {
-    return (
-        <div className="row" style={{textAlign:"left"}}>
-            <div className="col-8" style={{textAlign:"left"}}>
-               {(status === "Pending") && 
-               <div style={{width:"84px", backgroundColor:"#FFEBCD", height:"25px", fontSize:"10px", borderRadius:"5px", paddingTop:"5px", marginLeft:"36px"}}>
-                <div className="row">
-                    <div className="col-4" style={{textAlign:"right", paddingLeft:"20px", height:"8px", width:"8px"}}><img src={pendingimg}/></div>
-                    <div className="col-8" style={{textAlign:"left", color:"#FEA101"}}>{status}</div>
-                    
-                </div>
-               </div>
-            }
-            {
-                (status === "Accepted") && 
-               <div style={{width:"84px", backgroundColor:"#E0FFFF", height:"25px", fontSize:"10px", borderRadius:"5px",
-               paddingTop:"5px", marginLeft:"36px"}}>
-               <div className="row">
-                    <div className="col-4" style={{textAlign:"right", paddingLeft:"20px", height:"8px", width:"8px"}}><img src={acceptedimg}/></div>
-                    <div className="col-8" style={{textAlign:"left", color:"#40D2AC"}}>{status}</div>
-                    
-                </div>
-               
-               </div>
-            }
-            {
-                (status === "Rejected") && 
-                <div className="row" style={{marginRight:"10px"}}>
-                    <div className="col-4">
-                         <a style={{fontSize:"10px", color:"#405CD2"}}>Reason?</a>
-                    </div>
-                    <div className="col-8">
-                    <div style={{width:"84px", backgroundColor:"#FFF1DE", height:"25px", fontSize:"10px", borderRadius:"5px",
-                    paddingTop:"5px"}}>
-                    <div className="row">
-                    <div className="col-4" style={{textAlign:"right", paddingLeft:"20px", height:"8px", width:"8px"}}><img src={rejectedimg}/></div>
-                    <div className="col-8" style={{textAlign:"left", color:"#F26B6B"}}>{status}</div>
-                    
-                    </div>
-                    </div>
-                    </div>
-                </div>
-               
-            }
-            </div>
-            <div className="col-2">
-                <img src={editimg} height="15px" width="15px"/>
-            </div>
-            <div className="col-2">
-                <img src={deleteimg} height="15px" width="15px"/>
-            </div>
-        </div>
-    )
-}
+
 
 
 
 
 export const Data = ({date, requeston, type, reason, amount, attachment, status}) => {
-    return (
 
+  const [openPopup, SetOpenPopup] = useState(false)
+  const [openRejectMsg, SetRejectMsg] = useState(false)
+
+  const Attachment = ({num}) => {
+   
+       return (
+           <div className="row"> 
+               <button onClick={() => SetOpenPopup(true)} className="btn-dem" style={{border: "1px solid #BCBDC8",
+               borderRadius: "5px",
+               fontSize: "9px",
+               textAlign: "left",
+               paddingTop: "2px",
+              height:"22px",
+            width:"22px",
+            cursor:"pointer"}}>#{num}</button>  
+           </div>
+       )
+   }
+
+   const Status = ({status}) => {
+   
+     return (
+         <div className="row" style={{textAlign:"left"}}>
+             <div className="col-8" style={{textAlign:"left"}}>
+                {(status === "Pending") && 
+                <div style={{width:"84px", backgroundColor:"#FFEBCD", height:"25px", fontSize:"10px", borderRadius:"5px", paddingTop:"5px", marginLeft:"36px"}}>
+                 <div className="row">
+                     <div className="col-4" style={{textAlign:"right", paddingLeft:"20px", height:"8px", width:"8px"}}><img src={pendingimg}/></div>
+                     <div className="col-8" style={{textAlign:"left", color:"#FEA101"}}>{status}</div>
+                     
+                 </div>
+                </div>
+             }
+             {
+                 (status === "Accepted") && 
+                <div style={{width:"84px", backgroundColor:"#E0FFFF", height:"25px", fontSize:"10px", borderRadius:"5px",
+                paddingTop:"5px", marginLeft:"36px"}}>
+                <div className="row">
+                     <div className="col-4" style={{textAlign:"right", paddingLeft:"20px", height:"8px", width:"8px"}}><img src={acceptedimg}/></div>
+                     <div className="col-8" style={{textAlign:"left", color:"#40D2AC"}}>{status}</div>
+                     
+                 </div>
+                
+                </div>
+             }
+             {
+                 (status === "Rejected") && 
+                 <div className="row" style={{marginRight:"10px"}}>
+                     <div className="col-4">
+                          <a style={{fontSize:"10px", color:"#405CD2", cursor:"pointer"}} onClick={() => SetRejectMsg(true) }>Reason?</a>
+                     </div>
+                     <div className="col-8">
+                     <div style={{width:"84px", backgroundColor:"#FFF1DE", height:"25px", fontSize:"10px", borderRadius:"5px",
+                     paddingTop:"5px"}}>
+                     <div className="row">
+                     <div className="col-4" style={{textAlign:"right", paddingLeft:"20px", height:"8px", width:"8px"}}><img src={rejectedimg}/></div>
+                     <div className="col-8" style={{textAlign:"left", color:"#F26B6B"}}>{status}</div>
+                     
+                     </div>
+                     </div>
+                     </div>
+                 </div>
+                
+             }
+             </div>
+             <div className="col-2">
+                 <img src={editimg} height="15px" width="15px"/>
+             </div>
+             <div className="col-2">
+                 <img src={deleteimg} height="15px" width="15px"/>
+             </div>
+         </div>
+     )
+ }
+ 
+    return (
+            <div>
+               <Editpopup openPopup={openPopup} SetOpenPopup={SetOpenPopup}></Editpopup>   
+               <Rejectionmsg openRejectMsg={openRejectMsg} SetRejectMsg={SetRejectMsg}/>  
+           
         <div className="row" style={{ paddingTop:"20px",  marginLeft:"42px", marginRight:"20px", borderBottom:"1px solid #E8E9EE"}}>
              <div className="col-1" style={{ fontSize:"10px", textAlign:"left", paddingRight:"15px", paddingBottom:"20px"}}><div className="row">{date}</div></div>
              <div className="col-1" style={{ fontSize:"10px", textAlign:"left", paddingRight:"15px", paddingLeft:"13px", paddingBottom:"20px"}}><div className="row">{requeston}</div></div>
@@ -183,7 +203,7 @@ export const Data = ({date, requeston, type, reason, amount, attachment, status}
                {(attachment === "1") && 
                <div className="row">
                <div className="col-1">
-                  <Attachment num = "1"/>
+                  <Attachment num = "1" />
                 </div></div> }
                 {(attachment === "2") && 
                 <div className="row">
@@ -249,5 +269,7 @@ export const Data = ({date, requeston, type, reason, amount, attachment, status}
              <div className="col-3" style={{  textAlign:"left"}}><Status status={status}/></div>
               
           </div>
+          </div>
     )
 }
+

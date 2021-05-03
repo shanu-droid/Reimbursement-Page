@@ -13,7 +13,7 @@ const Editpopup = (props) => {
           <div className="col-10">
           <h6 style={{fontSize:"15px", fontWeight:"bolder", paddingTop:"20px", paddingLeft:"20px"}}>Edit Reimbursement data</h6>
           </div>
-           <div className="col-2" style={{ border:"1px solid #9898A5", borderRadius:"5px", height:"35px", textAlign:"left"}}>
+           <div className="col-2" style={{ border:"1px solid #9898A5", borderRadius:"5px", height:"35px", textAlign:"left", cursor:"pointer"}}>
              <img src={close} onClick={() => props.SetOpenPopup(false)} style={{height:"25px", width:"25px"}}/>
            </div>
           </div>
